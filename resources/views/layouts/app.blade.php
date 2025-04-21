@@ -7,10 +7,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap CSS -->
+<link href="	https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- Favicon -->
 <link rel="shortcut icon" href="{{ $settings->favicon ? asset($settings->favicon) : asset('assets/settings/default-favicon.ico') }}" type="image/x-icon">
 <link rel="apple-touch-icon" href="{{ $settings->favicon ? asset($settings->favicon) : asset('assets/settings/default-favicon.ico') }}">
-    <style>
+   
+   <style>
         :root {
             --primary: {{ $settings->primary_color ?? '#0D2F5F' }};
             --secondary: {{ $settings->secondary_color ?? '#14A0E9' }};
@@ -31,11 +34,12 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Inter', sans-serif;
-  background-color: var(--light);
+  background-color: #f0f0f0;
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -43,10 +47,12 @@ body {
 
 .desktop {
   max-width: 1440px;
-  margin: 0 auto;
+  margin: 0 6rem;
   background-color: var(--light);
 }
-
+a:hover{
+  color:rgb(20, 160, 233) !important;
+}
 h1, h2, h3, h4, h5, h6 {
   color: var(--primary);
   margin-bottom: 1rem;
@@ -65,7 +71,7 @@ a:hover {
 button {
   cursor: pointer;
   border: none;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   padding: 0.5rem 1rem;
   font-family: 'Inter', sans-serif;
   font-weight: 500;
@@ -81,7 +87,7 @@ button:hover {
   display: flex;
   align-items: center;
   margin-bottom: 1.5rem;
-  font-size: 1.5rem;
+  font-size: 1rem;
   color: var(--primary);
   border-bottom: 2px solid var(--light-gray);
   padding-bottom: 0.5rem;
@@ -94,38 +100,44 @@ button:hover {
 
 .view-all {
   display: block;
-  margin: 1rem auto 0;
+  /* margin: 1rem auto 0; */
   background-color: transparent;
-  color: var(--secondary);
-  border: 1px solid var(--secondary);
-  border-radius: var(--radius);
+  color: #0d2f5f !important;
+  border: 2px solid #0d2f5f;
+  /* border-radius: var(--radius); */
   padding: 0.3rem 1rem;
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   text-align: center;
 }
+.contacts {
+  
+  display: flex;
+    justify-content: center;
+  z-index: 99;
+   width: 100%;
 
-.view-all:hover {
-  background-color: var(--secondary);
-  color: white;
 }
+.view-all:hover {
+  background-color: #0d2f5f!important;
+  color: white !important;
+}
+
 
 /* Header Styles */
 .header {
-  /* width: 1524px;
-  margin-left: -40px; */
+  /* box-shadow: 1px 1px 12px; */
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: white;
-  border-radius: var(--radius);
-  margin-bottom: 1.5rem;
-  /* box-shadow: var(--shadow);
-  border:1px solid #0D2F5F;
-  box-shadow:3px 3px 12px #0D2F5F; */
-  /* position: sticky;
-  top: 0;
-  z-index: 100; */
+  background-color: #0d2f5f;
+  position: sticky;
+    z-index: 99999999999;
+    top: 1px;
+  /* border 1px solid var(--light-gray); */
+  /* border-radius: var(--radius); */
+  /* margin-bottom: 1.5rem; */
+
 }
 
 .logo {
@@ -147,7 +159,9 @@ button:hover {
   display: flex;
   gap : 51px;
 }
-
+ a{
+  color : white !important;
+}
 .nav-link {
   margin: 0 1rem;
   font-weight: 600;
@@ -172,8 +186,8 @@ button:hover {
 .search-container {
   display: flex;
   align-items: center;
-  background-color: white;
-  border-radius: 20px;
+  /* background-color: white; */
+  /* border-radius: 20px; */
   padding: 0.3rem 0.5rem;
 }
 
@@ -182,7 +196,7 @@ button:hover {
 .search-button {
   background: none;
   border: none;
-  color: var(--primary);
+  color: white;
   padding: 0.2rem 0.5rem;
   font-size: 1.5rem;
 }
@@ -201,7 +215,7 @@ button:hover {
 .profile-img {
   width: 40px;
   height: 40px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   object-fit: cover;
   border: 2px solid var(--light-gray);
   transition: var(--transition);
@@ -218,7 +232,7 @@ button:hover {
   background-color: white;
   min-width: 150px;
   box-shadow: var(--shadow);
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   z-index: 10;
 }
 
@@ -244,7 +258,8 @@ button:hover {
 
 /* Main Content Area */
 .main-content {
-  padding: 0 4.5rem;
+  padding: 0 2rem;
+  border-top: 20px solid #f0f0f0;
 }
 
 /* Banner Styles */
@@ -259,7 +274,7 @@ button:hover {
   flex: 1;
   background-color: white;
   padding: 1.5rem;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   box-shadow: var(--shadow);
   height: 400px;
   overflow-y: scroll;
@@ -300,7 +315,7 @@ button:hover {
   padding: 2rem;
   color: white;
   text-align: center;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -326,7 +341,7 @@ button:hover {
   padding: 0.75rem 2rem;
   font-size: 1.1rem;
   font-weight: 600;
-  border-radius: 25px;
+  /* border-radius: 25px; */
   transition: var(--transition);
 }
 
@@ -339,11 +354,13 @@ button:hover {
 /* Quick Links Styles */
 .quick-links {
   margin-bottom: 2rem;
+ 
 }
 
 .links-container {
   display: flex;
   gap: 1.5rem;
+
   transition: transform 0.5s ease; /* Smooth sliding animation */
   padding: 0.5rem;
 }
@@ -354,7 +371,7 @@ button:hover {
   width: 100%;
   text-align: center;
   color: white;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   box-shadow: var(--shadow);
   transition: var(--transition);
   position: relative;
@@ -369,16 +386,15 @@ button:hover {
   bottom: -50px;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 0.5rem;
-  border-radius: 0 0 var(--radius) var(--radius);
+  /* border-radius: 0 0 var(--radius) var(--radius); */
   transition: var(--transition);
   opacity: 0;
 }
 
 .link-card:hover {
-  transform: translateY(-10px);
+  transform: translateY(-15px);
   cursor: pointer;
 }
 
@@ -399,7 +415,7 @@ button:hover {
 /* Two Column Layout */
 .two-column {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   gap: 1.5rem;
   margin-bottom: 2rem;
 }
@@ -411,10 +427,10 @@ button:hover {
 }
 
 /* Events Styles */
-.events, .documents, .contacts, .leaderboard, .invitations {
+.events, .documents, .leaderboard, .invitations {
   background-color: white;
   padding: 1.5rem;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   box-shadow: var(--shadow);
 }
 
@@ -516,7 +532,7 @@ button:hover {
   align-items: center;
   gap: 1rem;
   padding: 0.5rem;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   transition: var(--transition);
 }
 
@@ -586,7 +602,7 @@ button:hover {
   display: flex;
   align-items: center;
   padding: 0.5rem;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   transition: var(--transition);
 }
 
@@ -628,14 +644,15 @@ button:hover {
 
  /* Search Bar */
  .search-contacts {
+
     position: relative;
-    margin-bottom: 1.5rem;
+    width: inherit;
   }
   .search-contacts input {
     width: 100%;
     padding: 0.75rem 2.5rem 0.75rem 1rem;
     border: 1px solid var(--light-gray);
-    border-radius: var(--radius);
+    /* border-radius: var(--radius); */
     outline: none;
     transition: var(--transition);
   }
@@ -662,7 +679,7 @@ button:hover {
     align-items: center;
     gap: 1rem;
     padding: 0.5rem;
-    border-radius: var(--radius);
+    /* border-radius: var(--radius); */
     transition: var(--transition);
   }
   .contact:hover {
@@ -676,7 +693,7 @@ button:hover {
     border: 2px solid var(--light-gray);
   }
   .contact-details {
-    flex: 1;
+
   }
   .contact-details h4 {
     margin-bottom: 0.2rem;
@@ -698,7 +715,7 @@ button:hover {
     background: none;
     color: var(--primary);
     padding: 0.3rem;
-    border-radius: 50%;
+    /* border-radius: 50%; */
   }
   .contact-action:hover {
     background-color: var(--light);
@@ -724,7 +741,7 @@ button:hover {
   align-items: center;
   gap: 1rem;
   padding: 0.5rem;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   transition: var(--transition);
 }
 
@@ -799,7 +816,7 @@ button:hover {
   align-items: center;
   gap: 1rem;
   padding: 1rem;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   background-color: var(--light);
   transition: var(--transition);
 }
@@ -874,7 +891,7 @@ button:hover {
   background-color: var(--primary);
   color: white;
   padding: 2rem 1.5rem 1rem;
-  border-radius: var(--radius) var(--radius) 0 0;
+  /* border-radius: var(--radius) var(--radius) 0 0; */
 }
 
 .footer-content {
@@ -963,7 +980,7 @@ button:hover {
 .announcement-slider {
   flex: 1;
   position: relative;
-  border-radius: var(--radius);
+  /* border-radius: var(--radius); */
   overflow: hidden;
   box-shadow: var(--shadow);
 }
@@ -1015,7 +1032,7 @@ button:hover {
   color: white;
   padding: 0.5rem 1.5rem;
   margin-top: 0.5rem;
-  border-radius: 20px;
+  /* border-radius: 20px; */
 }
 
 .slider-controls {
@@ -1032,7 +1049,7 @@ button:hover {
 .prev-slide, .next-slide {
   background-color: rgba(255,255,255,0.3);
   color: white;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   width: 30px;
   height: 30px;
   display: flex;
@@ -1069,7 +1086,7 @@ button:hover {
   color: white;
   padding: 0.3rem 0.8rem;
   font-size: 0.8rem;
-  border-radius: 4px;
+  /* border-radius: 4px; */
 }
 
 .join-event-btn:hover {
@@ -1085,6 +1102,8 @@ button:hover {
 
 .links-wrapper {
   display: flex;
+  justify-content : center;
+  align-items:center;
   gap: 1.5rem;
   transition: transform 0.5s ease;
   padding: 0.5rem;
@@ -1101,7 +1120,7 @@ button:hover {
 .prev-links, .next-links {
   background-color: var(--light);
   color: var(--primary);
-  border-radius: 50%;
+  /* border-radius: 50%; */
   width: 30px;
   height: 30px;
   display: flex;
@@ -1117,7 +1136,7 @@ button:hover {
 .nav-dot {
   width: 8px;
   height: 8px;
-  border-radius: 50%;
+  /* border-radius: 50%; */
   background-color: var(--light-gray);
   cursor: pointer;
   transition: var(--transition);
@@ -1257,6 +1276,449 @@ button:hover {
     width: 100%;
   }
 }
+/* Main Layout Styles */
+.banking-layout {
+  font-family: 'Arial', sans-serif;
+  z-index: 999;
+  padding-bottom: 20px;
+}
+
+/* Top Row Layout */
+.banking-top-row {
+ 
+  position: relative;
+  z-index: 99;
+ 
+}
+
+.banking-slider-container {
+  flex: 2;
+  position: relative;
+  overflow: hidden;
+  /* border-radius: 12px; */
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.banking-quick-links {
+  
+  background-color: #f7f9fc;
+  /* border-radius: 12px; */
+  padding: 10px 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+
+.banking-currency-card {
+  background-color: #ffffff;
+  /* border-radius: 12px; */
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Slider Styles */
+.banking-slider {
+  position: relative;
+  height: 490px;
+  width: 100%;
+}
+
+.banking-slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.banking-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.banking-slide img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* border-radius: 12px; */
+}
+
+.banking-slide-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+
+}
+
+.banking-slide:hover .banking-slide-content {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.6), transparent);
+  transition: background 0.3s ease;
+}
+.banking-slide-content h2{
+  color:white;
+  font-weight:bold;
+}
+.banking-slide-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background: linear-gradient(135deg, #004e78, #14A0E9);
+  color: white;
+  text-decoration: none;
+  /* border-radius: 4px; */
+  font-weight: bold;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.banking-slide-btn:hover {
+  background:white;
+  color:white;
+  text-decoration: none;
+  transform: translateY(-2px);
+}
+
+.banking-slider-controls {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+}
+
+.banking-prev-slide,
+.banking-next-slide {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: none;
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.banking-prev-slide:hover,
+.banking-next-slide:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.banking-slider-dots {
+  display: flex;
+  gap: 10px;
+  margin: 0 15px;
+}
+
+.banking-dot {
+  width: 10px;
+  height: 10px;
+  background-color: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.banking-dot.active {
+  background-color: white;
+}
+
+/* Quick Links Styles */
+.banking-quick-links h2 {
+    /* margin-top: 5px; */
+    padding-bottom: 6px;
+    font-size: small;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.banking-links-wrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 5px;
+}
+
+.banking-link-card {
+  padding: 15px;
+  /* border-radius: 8px; */
+  color: white;
+  text-align: center;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.banking-link-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.banking-link-card i {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.banking-link-card p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.banking-quick-links-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.banking-prev-links,
+.banking-next-links {
+  background-color:rgb(255, 255, 255);
+  border: none;
+  /* border-radius: 50%; */
+  width: 30px;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.banking-prev-links:hover,
+.banking-next-links:hover {
+  background-color: #e0e0e0;
+}
+
+.banking-nav-dots {
+  display: flex;
+  gap: 8px;
+  margin: 0 10px;
+}
+
+.banking-nav-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #ccc;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.banking-nav-dot.active {
+  background-color: #666;
+}
+
+/* Currency Table Styles */
+.banking-currency-card h2 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.banking-currency-search {
+  position: relative;
+  margin-bottom: 15px;
+}
+
+.banking-currency-search input {
+  width: 100%;
+  padding: 10px 15px;
+  padding-right: 40px;
+  border: 1px solid #ddd;
+  /* border-radius: 6px; */
+  font-size: 14px;
+}
+
+.banking-currency-search i {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+}
+
+.banking-currency-table {
+  border: 1px solid #eee;
+  /* border-radius: 6px; */
+  overflow: hidden;
+}
+
+.banking-currency-header {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  background-color: #f7f9fc;
+  padding: 12px 15px;
+  font-weight: bold;
+  border-bottom: 1px solid #eee;
+}
+
+#banking-currency-rates {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.banking-currency-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  padding: 12px 15px;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s ease;
+}
+
+.banking-currency-row:hover {
+  background-color: #f5f5f5;
+}
+
+.banking-currency-row:last-child {
+  border-bottom: none;
+}
+
+
+/* ///////////////////////////////////////////////////////// */
+/* Search Results Dropdown */
+
+
+.search-results {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid var(--light-gray);
+    border-radius: 0 0 var(--radius) var(--radius);
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 999999;
+    box-shadow: var(--shadow);
+    padding: 0.75rem; /* Added padding */
+}
+
+.search-result-item {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--light-gray);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-result-item:hover {
+    background-color: var(--light);
+}
+
+.search-result-item img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Modal Styles */
+.modal {
+  background-color: rgb(0,0,0,0.6);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: white;
+    padding: 2rem;
+    border-radius: var(--radius);
+    width: 90%;
+    border: 3px solid black;
+    /* top: 194px; */
+    /* right: 378px; */
+    max-width: 500px;
+    position: relative;
+
+}
+
+.close-modal {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.modal-employee-photo {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    display: block;
+    border: 3px solid var(--secondary);
+}
+
+.modal-employee-info {
+    text-align: center;
+}
+
+.modal-employee-info p {
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+  .banking-top-row {
+    flex-direction: column;
+  }
+  
+  .banking-slider-container,
+  .banking-quick-links {
+    flex: none;
+    width: 100%;
+  }
+  
+  .banking-slider {
+    height: 300px;
+  }
+  
+  .banking-links-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .banking-links-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .banking-currency-header,
+  .banking-currency-row {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+}
+
+@media (max-width: 576px) {
+  .banking-slider {
+    height: 250px;
+  }
+  
+  .banking-links-wrapper {
+    grid-template-columns: 1fr 1fr;
+  }
+}
     /* Currency Search */
     .currency-search {
       margin-bottom: 1rem;
@@ -1266,7 +1728,7 @@ button:hover {
       width: 100%;
       padding: 0.75rem 1rem;
       border: 1px solid var(--light-gray);
-      border-radius: var(--radius);
+      /* border-radius: var(--radius); */
       outline: none;
       transition: var(--transition);
     }
@@ -1290,7 +1752,7 @@ button:hover {
     background-color: var(--primary);
     color: white;
     padding: 0.5rem;
-    border-radius: var(--radius);
+    /* border-radius: var(--radius); */
     z-index: 10;
     width: 200px;
     margin-top: 0.5rem;
@@ -1304,7 +1766,7 @@ button:hover {
       margin-top: 1rem;
       background-color: var(--light);
       padding: 1rem;
-      border-radius: var(--radius);
+      /* border-radius: var(--radius); */
       box-shadow: var(--shadow);
     }
     .nearest-events h3 {
@@ -1317,7 +1779,7 @@ button:hover {
       align-items: center;
       gap: 1rem;
       padding: 0.5rem;
-      border-radius: var(--radius);
+      /* border-radius: var(--radius); */
       transition: var(--transition);
     }
     .nearest-event:hover {
@@ -1337,7 +1799,7 @@ button:hover {
       display: flex;
       align-items: center;
       justify-content: center;
-      border-radius: 6px;
+      /* border-radius: 6px; */
       font-weight: 600;
       font-size: 1.2rem;
     }
@@ -1365,12 +1827,296 @@ button:hover {
       color: white;
       padding: 0.3rem 0.8rem;
       font-size: 0.8rem;
-      border-radius: 4px;
+      /* border-radius: 4px; */
     }
     .nearest-event-btn:hover {
       background-color: var(--primary);
     }
+/* Scrolling Ad Bar Styles */
+.scrolling-ad-container {
+    width: 100%;
+    overflow: hidden;
+    background: linear-gradient(135deg, #013c2c, #11AD83);
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd;
+    margin: 10px 0;
+    height: 40px;
+   
+    position: relative;
+}
 
+.scrolling-ad-track {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    position: absolute;
+    white-space: nowrap;
+    will-change: transform;
+    animation: scrollAds 30s linear infinite;
+}
+
+.scrolling-ad {
+    flex-shrink: 0;
+    padding: 0 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.scrolling-ad img {
+    max-height: 60px;
+    max-width: 160px;
+    object-fit: contain;
+}
+
+.ad-text {
+    margin-left: 10px;
+    font-size: 14px;
+    color : white;}
+
+@keyframes scrollAds {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+
+/* Pause animation on hover */
+.scrolling-ad-container:hover .scrolling-ad-track {
+    animation-play-state: paused;
+}
+/* Contacts Index Page Styles */
+.contacts-index {
+    padding: 2rem;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contacts-search {
+    position: relative;
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.contacts-search input {
+    width: 100%;
+    padding: 0.75rem 2.5rem 0.75rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.contacts-search input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    outline: none;
+}
+
+.contacts-search i {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #7f8c8d;
+}
+
+.contacts-list-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    overflow:hidden;
+    border: 1px solid #e0e0e0;
+}
+
+.contact-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    border-color: #3498db;
+}
+
+.contact-card-image {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 1rem;
+    border: 2px solid #e0e0e0;
+}
+
+.contact-card-details {
+    flex: 1;
+}
+
+.contact-card-name {
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+    font-size: 1.1rem;
+}
+
+.contact-card-phone,
+.contact-card-email,
+.contact-card-department {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    display: flex;
+    align-items: center;
+}
+
+.contact-card-phone i,
+.contact-card-email i,
+.contact-card-department i {
+    margin-right: 0.5rem;
+    width: 16px;
+    color: #3498db;
+}
+
+.contact-card-action {
+    background: none;
+    border: none;
+    color: #7f8c8d;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.contact-card-action:hover {
+    background-color: #e0e0e0;
+    color: #2c3e50;
+}
+
+/* Contact Modal Styles */
+.contact-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-modal-content {
+    background-color: white;
+    border-radius: 8px;
+    width: 90%;
+    max-width: 500px;
+    padding: 2rem;
+    position: relative;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.contact-modal-close {
+    position: absolute;
+    top: 1rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #7f8c8d;
+    transition: all 0.3s ease;
+}
+
+.contact-modal-close:hover {
+    color: #e74c3c;
+}
+
+.contact-modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.contact-modal-image {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #3498db;
+    margin-bottom: 1.5rem;
+}
+
+.contact-modal-info {
+    text-align: center;
+    width: 100%;
+}
+
+.contact-modal-info h3 {
+    margin-bottom: 1rem;
+    color: #2c3e50;
+}
+
+.contact-modal-info p {
+    margin: 0.75rem 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.contact-modal-info p i {
+    margin-right: 0.75rem;
+    color: #3498db;
+}
+
+/* Pagination Styles */
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.pagination li {
+    margin: 0 0.25rem;
+}
+
+.pagination li a,
+.pagination li span {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    color: #3498db;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.pagination li.active a,
+.pagination li.active span {
+    background-color: #3498db;
+    color: white;
+    border-color: #3498db;
+}
+
+.pagination li a:hover {
+    background-color: #f0f0f0;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .contacts-list-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .contact-modal-content {
+        width: 95%;
+        padding: 1.5rem;
+    }
+}
     </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
@@ -1388,3 +2134,4 @@ button:hover {
     @stack('scripts')
 </body>
 </html>
+

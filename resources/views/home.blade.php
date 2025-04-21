@@ -1,82 +1,73 @@
 @extends('layouts.app')
 
 @section('content')
-    <!-- Banner Section -->
-    <section class="banner slide-in-right">
-        <div class="currency-card" style="flex: 0.6;">
-            <h2>Currency Exchange Rates</h2>
-            <!-- Search Input -->
-            <div class="currency-search">
-                <input type="text" id="currency-search" placeholder="Search currencies..." />
-                <i class="fas fa-search"></i>
-            </div>
-            <div class="currency-table">
-                <div class="currency-header">
-                    <span>Currency</span>
-                    <span>Buy</span>
-                    <span>Sell</span>
-                </div>
-                <div id="currency-rates">
-                    <!-- Dynamic content will be inserted here -->
-                </div>
-            </div>
-        </div>
-        <!-- Larger announcement slider -->
-        <div class="announcement-slider" style="flex: 1.4; height: 400px;">
-            <div class="slider-container" style="height: 100%;">
-                @foreach($announcements as $index => $announcement)
-                    <div class="slide {{ $index === 0 ? 'active' : '' }}">
-                        <img src="{{ $announcement->image }}" alt="{{ $announcement->title }}">
-                        <div class="slide-content">
-                            <h2>{{ $announcement->title }}</h2>
-                            <p>{{ $announcement->description }}</p>
-                            <button class="slide-btn">{{ $announcement->button_text }}</button>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="slider-controls">
-                <button class="prev-slide"><i class="fas fa-chevron-left"></i></button>
-                <div class="slider-dots">
-                    @foreach($announcements as $index => $announcement)
-                        <span class="dot {{ $index === 0 ? 'active' : '' }}"></span>
-                    @endforeach
-                </div>
-                <button class="next-slide"><i class="fas fa-chevron-right"></i></button>
-            </div>
-        </div>
-    </section>
 
-    <!-- Quick Links Section -->
-    <div class="quick-links">
-        <br>
-        <hr>
-        <br>
-        <div class="quick-links-slider">
-            <div class="links-wrapper">
-                @foreach($quickLinks as $link)
-                    <div class="link-card" style="background: linear-gradient(135deg, {{ $link->color1 }}, {{ $link->color2 }});">
-                        <i class="fas {{ $link->icon }}"></i>
-                        <p>{{ $link->title }}</p>
+   <!-- Employee Details Modal -->
+   <div class="modal" id="employee-modal" style="display: none;">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div class="employee-details-container">
+                    <img src="" alt="Employee Photo" id="modal-employee-photo" class="modal-employee-photo">
+                    <div class="modal-employee-info">
+                        <h3 id="modal-employee-name"></h3>
+                        <p><i class="fas fa-envelope"></i> <span id="modal-employee-email"></span></p>
+                        <p><i class="fas fa-phone"></i> <span id="modal-employee-phone"></span></p>
+                        <p><i class="fas fa-building"></i> <span id="modal-employee-department"></span></p>
+                        <p><i class="fas fa-id-badge"></i> <span id="modal-employee-position"></span></p>
                     </div>
-                @endforeach
+                </div>
             </div>
         </div>
-        <div class="quick-links-nav">
-            <button class="prev-links"><i class="fas fa-chevron-left"></i></button>
-            <div class="nav-dots">
-                @for($i = 0; $i < ceil(count($quickLinks) / 4); $i++)
-                    <span class="nav-dot {{ $i === 0 ? 'active' : '' }}"></span>
-                @endfor
+<!-- Main Container -->
+<section class="banking-layout">
+  <!-- Top Row -->
+  <div class="banking-top-row">
+ <!-- Scrolling Ad Bar -->
+<div class="scrolling-ad-container">
+    <div class="scrolling-ad-track">
+        @foreach($ads as $ad)
+            <div class="scrolling-ad"> 
+                    @if($ad->text)
+                        <span class="ad-text">{{ $ad->text }}</span>
+                    @endif
+                </a>
             </div>
-            <button class="next-links"><i class="fas fa-chevron-right"></i></button>
-        </div>
+        @endforeach
     </div>
+</div>
+</div>
+ 
+</section>
 
     <!-- Two Column Layout -->
     <div class="two-column">
         <!-- Left Column -->
         <div class="column left-column">
+        
+           <!-- Left Column - Announcement Slider -->
+    <div class="banking-slider-container">
+      <div class="banking-slider">
+        @foreach($announcements as $index => $announcement)
+        <div class="banking-slide {{ $index === 0 ? 'active' : '' }}">
+          <img src="{{ $announcement->image }}" alt="{{ $announcement->title }}">
+          <div class="banking-slide-content">
+            <h2>{{ $announcement->title }}</h2>
+            <p>{{ $announcement->description }}</p>
+            <a href="{{ $announcement->button_url }}" class="banking-slide-btn">{{ $announcement->button_text }}</a>
+          </div>
+        </div>
+        @endforeach
+      </div>
+      <div class="banking-slider-controls">
+        <button class="banking-prev-slide" style="display:none;"><i class="fas fa-chevron-left"></i></button>
+        <div class="banking-slider-dots">
+          @foreach($announcements as $index => $announcement)
+          <span class="banking-dot {{ $index === 0 ? 'active' : '' }}"></span>
+          @endforeach
+        </div>
+        <button class="banking-next-slide" style="display:none;"><i class="fas fa-chevron-right" ></i></button>
+      </div>
+    </div>
             <!-- Events Section -->
             <section class="events slide-in-left">
                 <h2 class="section-title">Events <i class="fas fa-calendar-alt"></i></h2>
@@ -109,7 +100,9 @@
                                 </div>
                             </div>
                         @endforeach
+                        
                     </div>
+                    
                 </div>
             </section>
 
@@ -142,43 +135,88 @@
                     <button class="view-all">View all documents</button>
                 @endif
             </section>
+               <!-- Invitations Section -->
+               <!-- <section class="invitations slide-in-left">
+                <h2 class="section-title">Invitations <i class="fas fa-envelope-open-text"></i></h2>
+                <div class="invitation-list">
+                    @foreach($invitations as $invitation)
+                        <div class="invitation">
+                            <div class="invitation-icon">
+                                <i class="fas {{ $invitation->icon }}"></i>
+                            </div>
+                            <div class="invitation-details">
+                                <h4>{{ $invitation->title }}</h4>
+                                <p>{{ $invitation->description }}</p>
+                                <div class="invitation-actions">
+                                   
+                                    <a href="{{ $invitation->button_text }}" class="accept-btn">{{ $invitation->button_text }}</a>
+                                    <button class="decline-btn">Decline</button>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </section> -->
         </div>
 
         <!-- Right Column -->
         <div class="column right-column">
-            <!-- Contacts Section -->
-            <section class="contacts slide-in-right" id="contacts">
-                <h2 class="section-title">Contacts <i class="fas fa-address-book"></i></h2>
-                <!-- Search Input -->
-                <div class="search-contacts">
-                    <input type="text" id="contact-search" placeholder="Search by name, email, phone, or department..." />
-                    <i class="fas fa-search"></i>
-                </div>
-                <!-- Contact List -->
-                <div class="contact-list" id="contact-list">
-                    @foreach($contacts as $contact)
-                        <div class="contact" data-name="{{ $contact->name }}" data-email="{{ $contact->email }}" data-phone="{{ $contact->phone }}" data-department="{{ $contact->department }}">
-                            <img src="{{ $contact->photo ? $contact->photo : asset('images/pr.jpeg') }}" alt="Contact" class="contact-img">
-                            <div class="contact-details">
-                                <h4>{{ $contact->name }}</h4>
-                                <p><i class="fas fa-phone"></i> {{ $contact->phone }}</p>
-                                <p><i class="fas fa-envelope"></i> {{ $contact->email }}</p>
-                                <p><i class="fas fa-building"></i> {{ $contact->department }}</p>
-                            </div>
-                            <button class="contact-action"><i class="fas fa-ellipsis-v"></i></button>
-                        </div>
-                    @endforeach
-                </div>
-                @if($contacts->count() > 3)
-                    <button class="view-all">View all contacts</button>
-                @endif
-            </section>
+        <section class="contacts slide-in-right" id="contacts">
+        <!-- Search Input -->
+        <div class="search-contacts">
+            <input type="text" id="contact-search" placeholder="Search by name, email, phone, or department..." />
+            <i class="fas fa-search"></i>
+            <div class="search-results" id="search-results" style="display: none;"></div>
+        </div>
+        
+     
+        
+        <a href="{{ route('contacts.index') }}" class="view-all">View all contacts</a>
+    </section>
+    <!-- Right Column - Quick Links -->
+    <div class="banking-quick-links">
+      <h2>Quick Access</h2>
+      <div class="banking-links-wrapper">
+        @foreach($quickLinks as $link)
+        <a href="{{ $link->url }}">
+        <div class="banking-link-card" style="background: linear-gradient(135deg, {{ $link->color1 }}, {{ $link->color2 }});">
+          <i class="fas {{ $link->icon }}"></i>
+          <p>{{ $link->title }}</p>
+        </div></a>
+        @endforeach
+      </div>
+      
+    </div>
+  
+  
+           <!-- Bottom Row - Currency Table -->
+  <div class="banking-bottom-row">
+    <div class="banking-currency-card">
+      <h2>Currency Exchange Rates</h2>
+      <!-- Search Input -->
+      <div class="banking-currency-search">
+        <input type="text" id="banking-currency-search" placeholder="Search currencies..." />
+        <i class="fas fa-search"></i>
+      </div>
+      <div class="banking-currency-table">
+        <div class="banking-currency-header">
+          <span>Currency</span>
+          <span>Buy</span>
+          <span>Sell</span>
+        </div>
+        <div id="banking-currency-rates">
+          <!-- Dynamic content will be inserted here -->
+        </div>
+      </div>
+    </div>
+  </div>
+        
             
             <!-- Leaderboard Section -->
             <section class="leaderboard fade-in">
                 <h2 class="section-title">Leaderboard <i class="fas fa-trophy"></i></h2>
                 <div class="leaderboard-content">
-                    <h3>Fastest and Well-trained Employees for {{ date('Y') }}</h3>
+                    <h3>The most accomplished and productive branches for {{ date('Y') }}</h3>
                     @foreach($leaderboards as $index => $leader)
                         <div class="leaderboard-item">
                             <div class="rank">{{ $index + 1 }}</div>
@@ -193,34 +231,288 @@
                 </div>
             </section>
 
-            <!-- Invitations Section -->
-            <section class="invitations slide-in-left">
-                <h2 class="section-title">Invitations <i class="fas fa-envelope-open-text"></i></h2>
-                <div class="invitation-list">
-                    @foreach($invitations as $invitation)
-                        <div class="invitation">
-                            <div class="invitation-icon">
-                                <i class="fas {{ $invitation->icon }}"></i>
-                            </div>
-                            <div class="invitation-details">
-                                <h4>{{ $invitation->title }}</h4>
-                                <p>{{ $invitation->description }}</p>
-                                <div class="invitation-actions">
-                                    <button class="accept-btn">{{ $invitation->button_text }}</button>
-                                    <button class="decline-btn">Decline</button>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            </section>
-        </div>
-    </div>
+         
+      
+            </div> <!-- This closes the right-column div -->
+    </div> <!-- This closes the two-column div -->
 @endsection
 
 @push('scripts')
     <script>
-        // Your JavaScript from the original file
-        // Make sure to update API URLs to use Laravel routes
+
+      
+      document.addEventListener('DOMContentLoaded', function() {
+    // Get all contacts from Laravel
+    const contacts = @json($contacts ?? []);
+    
+    // Contact Search Functionality
+    const contactSearch = document.getElementById('contact-search');
+    const searchResults = document.getElementById('search-results');
+    const employeeModal = document.getElementById('employee-modal');
+    const closeModal = document.querySelector('.close-modal');
+
+    // Debounce function to limit search frequency
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    // Handle search input
+    contactSearch.addEventListener('input', debounce(function(e) {
+        const query = e.target.value.trim().toLowerCase();
+        
+        if (query.length < 2) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        // Filter contacts
+        const filteredContacts = contacts.filter(contact => {
+            return (contact.name && contact.name.toLowerCase().includes(query)) ||
+                   (contact.email && contact.email.toLowerCase().includes(query)) ||
+                   (contact.phone && contact.phone.toLowerCase().includes(query)) ||
+                   (contact.department && contact.department.toLowerCase().includes(query));
+        });
+
+        displaySearchResults(filteredContacts);
+    }, 300));
+
+    // Display search results
+    function displaySearchResults(results) {
+        searchResults.innerHTML = '';
+        
+        if (results.length > 0) {
+            results.forEach(contact => {
+                const item = document.createElement('div');
+                item.className = 'search-result-item';
+                item.innerHTML = `
+                    <img src="${contact.photo || '/images/pr.jpeg'}" alt="${contact.name}">
+                    <div>
+                        <strong>${contact.name}</strong>
+                        <div class="text-muted">${contact.department}</div>
+                    </div>
+                `;
+                item.addEventListener('click', () => showEmployeeDetails(contact));
+                searchResults.appendChild(item);
+            });
+            searchResults.style.display = 'block';
+        } else {
+            searchResults.innerHTML = '<div class="search-result-item">No contacts found</div>';
+            searchResults.style.display = 'block';
+        }
+    }
+
+    // Show employee details in modal
+    function showEmployeeDetails(contact) {
+        document.getElementById('modal-employee-name').textContent = contact.name || 'N/A';
+        document.getElementById('modal-employee-email').textContent = contact.email || 'N/A';
+        document.getElementById('modal-employee-phone').textContent = contact.phone || 'N/A';
+        document.getElementById('modal-employee-department').textContent = contact.department || 'N/A';
+        document.getElementById('modal-employee-position').textContent = contact.position || 'Employee';
+        
+        const photoUrl = contact.photo || '/images/pr.jpeg';
+        document.getElementById('modal-employee-photo').src = photoUrl;
+        
+        searchResults.style.display = 'none';
+        contactSearch.value = contact.name; // Fill search with selected name
+        employeeModal.style.display = 'flex';
+    }
+
+    // Close modal
+    closeModal.addEventListener('click', () => {
+        employeeModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === employeeModal) {
+            employeeModal.style.display = 'none';
+        }
+    });
+});
+     document.addEventListener('DOMContentLoaded', function() {
+  // Slider functionality
+  const slides = document.querySelectorAll('.banking-slide');
+  const dots = document.querySelectorAll('.banking-dot');
+  const prevBtn = document.querySelector('.banking-prev-slide');
+  const nextBtn = document.querySelector('.banking-next-slide');
+  let currentSlide = 0;
+  let slidePaused = false;
+  let slideInterval;
+
+  // Initialize slider
+  function startSlideshow() {
+    slideInterval = setInterval(() => {
+      if (!slidePaused) {
+        changeSlide(currentSlide + 1);
+      }
+    }, 5000);
+  }
+
+  function changeSlide(n) {
+    slides[currentSlide].classList.remove('active');
+    dots[currentSlide].classList.remove('active');
+    
+    currentSlide = (n + slides.length) % slides.length;
+    
+    slides[currentSlide].classList.add('active');
+    dots[currentSlide].classList.add('active');
+  }
+
+  // Event listeners for slider controls
+  prevBtn.addEventListener('click', () => {
+    clearInterval(slideInterval);
+    changeSlide(currentSlide - 1);
+    startSlideshow();
+  });
+
+  nextBtn.addEventListener('click', () => {
+    clearInterval(slideInterval);
+    changeSlide(currentSlide + 1);
+    startSlideshow();
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      clearInterval(slideInterval);
+      changeSlide(index);
+      startSlideshow();
+    });
+  });
+
+  // Pause slideshow on hover
+  const sliderContainer = document.querySelector('.banking-slider-container');
+  sliderContainer.addEventListener('mouseenter', () => {
+    slidePaused = true;
+  });
+  
+  sliderContainer.addEventListener('mouseleave', () => {
+    slidePaused = false;
+  });
+
+  // Start the slideshow
+  startSlideshow();
+
+  // Quick Links Navigation
+  const linkCards = document.querySelectorAll('.banking-link-card');
+  const linkDots = document.querySelectorAll('.banking-nav-dot');
+  const prevLinksBtn = document.querySelector('.banking-prev-links');
+  const nextLinksBtn = document.querySelector('.banking-next-links');
+  const linksPerPage = window.innerWidth < 768 ? 4 : 12;
+  let currentLinkPage = 0;
+
+  function showLinkPage(page) {
+    const totalPages = Math.ceil(linkCards.length / linksPerPage);
+    currentLinkPage = (page + totalPages) % totalPages;
+    
+    linkCards.forEach((card, index) => {
+      const startIndex = currentLinkPage * linksPerPage;
+      const endIndex = startIndex + linksPerPage - 1;
+      
+      if (index >= startIndex && index <= endIndex) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    
+    linkDots.forEach((dot, index) => {
+      dot.classList.toggle('active', index === currentLinkPage);
+    });
+  }
+
+  prevLinksBtn.addEventListener('click', () => {
+    showLinkPage(currentLinkPage - 1);
+  });
+
+  nextLinksBtn.addEventListener('click', () => {
+    showLinkPage(currentLinkPage + 1);
+  });
+
+  linkDots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      showLinkPage(index);
+    });
+  });
+
+  // Initialize quick links display
+  showLinkPage(0);
+
+  // Currency Search functionality
+  const currencySearch = document.getElementById('banking-currency-search');
+  
+  currencySearch.addEventListener('input', function() {
+    const searchTerm = this.value.toLowerCase();
+    const currencyRows = document.querySelectorAll('.banking-currency-row');
+    
+    currencyRows.forEach(row => {
+      const currencyName = row.querySelector('.currency-name').textContent.toLowerCase();
+      
+      if (currencyName.includes(searchTerm)) {
+        row.style.display = '';
+      } else {
+        row.style.display = 'none';
+      }
+    });
+  });
+
+  // Example function to populate currency rates (replace with your actual data)
+  function populateCurrencyRates() {
+    const currencies = [
+      { code: 'USD', name: 'US Dollar', buy: 1.000, sell: 1.002 },
+      { code: 'EUR', name: 'Euro', buy: 1.080, sell: 1.085 },
+      { code: 'GBP', name: 'British Pound', buy: 1.270, sell: 1.275 },
+      { code: 'JPY', name: 'Japanese Yen', buy: 0.0067, sell: 0.0069 },
+      { code: 'CAD', name: 'Canadian Dollar', buy: 0.740, sell: 0.745 },
+      { code: 'AUD', name: 'Australian Dollar', buy: 0.670, sell: 0.675 },
+      { code: 'CHF', name: 'Swiss Franc', buy: 1.120, sell: 1.125 },
+      { code: 'CNY', name: 'Chinese Yuan', buy: 0.138, sell: 0.140 }
+    ];
+    
+    const ratesContainer = document.getElementById('banking-currency-rates');
+    
+    currencies.forEach(currency => {
+      const row = document.createElement('div');
+      row.className = 'banking-currency-row';
+      
+      row.innerHTML = `
+        <span class="currency-name">${currency.code} - ${currency.name}</span>
+        <span>${currency.buy.toFixed(4)}</span>
+        <span>${currency.sell.toFixed(4)}</span>
+      `;
+      
+      ratesContainer.appendChild(row);
+    });
+  }
+  
+  // Call function to populate currency rates
+  populateCurrencyRates();
+
+  // Handle window resize for responsive behavior
+  window.addEventListener('resize', function() {
+    const linksPerPage = window.innerWidth < 768 ? 3 : 4;
+    showLinkPage(currentLinkPage);
+  });
+});
+document.addEventListener('DOMContentLoaded', function() {
+    const adTrack = document.querySelector('.scrolling-ad-track');
+    if (adTrack) {
+        // Clone ads for seamless looping
+        adTrack.innerHTML += adTrack.innerHTML;
+        
+        // Reset animation when it completes
+        adTrack.addEventListener('animationiteration', function() {
+            // Reset position when halfway through
+            if (this.style.transform === 'translateX(-50%)') {
+                this.style.transform = 'translateX(0)';
+                // Force reflow
+                void this.offsetWidth;
+            }
+        });
+    }
+});
     </script>
 @endpush

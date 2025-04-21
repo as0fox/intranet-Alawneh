@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\Storage;
 
 class EventController extends Controller
 {
+    public function rsvp(Event $event)
+    {
+        if (auth()->user()->events()->where('event_id', $event->id)->exists()) {
+            return back()->with('error', 'You have already RSVPed to this event');
+        }
+
+        auth()->user()->events()->attach($event->id);
+        return back()->with('success', 'Successfully RSVPed to event');
+    }
+
     public function index()
     {
         $events = Event::latest()->get();

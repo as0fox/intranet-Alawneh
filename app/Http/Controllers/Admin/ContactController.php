@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use App\Models\Navigation;
 use Illuminate\Support\Facades\Storage;
 
 class ContactController extends Controller
@@ -12,8 +13,30 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::latest()->get();
+        
         return view('admin.contacts.index', compact('contacts'));
     }
+    public function index1()
+{
+    $ads = [
+        (object)[
+            'image' => asset('images/ads/ad1.png'),
+            'link' => '#',
+            'alt_text' => 'Advertisement 1',
+            'text' => 'Special Offer: 2% Cashback on All Transactions'
+        ],
+        (object)[
+            'image' => asset('images/ads/ad2.png'),
+            'link' => '#',
+            'alt_text' => 'Advertisement 2',
+            'text' => 'New Mortgage Rates Starting at 3.5%'
+        ],
+        // Add more ads as needed
+      ];
+    $navigations = Navigation::where('is_active', true)->orderBy('order')->get();
+    $contacts = Contact::orderBy('name')->paginate(20);
+    return view('contacts.index', compact('contacts','navigations','ads'));
+}
 
     public function create()
     {

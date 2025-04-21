@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
             SiteSettingsSeeder::class,
             NavigationSeeder::class,
             CurrencySettingsSeeder::class,
+            QuickLinksSeeder::class,
         ]);
     }
 }

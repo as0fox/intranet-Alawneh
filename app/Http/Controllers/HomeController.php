@@ -16,6 +16,23 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $ads = [
+            (object)[
+                'image' => asset('images/ads/ad1.png'),
+                'link' => '#',
+                'alt_text' => 'Advertisement 1',
+                'text' => 'Special Offer: 2% Cashback on All Transactions'
+            ],
+            (object)[
+                'image' => asset('images/ads/ad2.png'),
+                'link' => '#',
+                'alt_text' => 'Advertisement 2',
+                'text' => 'New Mortgage Rates Starting at 3.5%'
+            ],
+            // Add more ads as needed
+          ];
+          
+    
         $settings = SiteSetting::first();
         $navigations = Navigation::where('is_active', true)->orderBy('order')->get();
         $announcements = Announcement::where('is_active', true)->get();
@@ -41,6 +58,7 @@ class HomeController extends Controller
             'documents',
             'contacts',
             'leaderboards',
+            'ads',
             'invitations'
         ));
     }

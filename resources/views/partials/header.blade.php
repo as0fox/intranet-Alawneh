@@ -13,7 +13,7 @@
     </nav>
     <div class="search-container">
         <button class="search-button">
-            <i class="fa-regular fa-comments"></i>
+        <i class="fa-regular fa-comments"></i>
         </button>
     </div>
 </header>

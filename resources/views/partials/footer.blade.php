@@ -2,18 +2,16 @@
     <div class="footer-content">
         <div class="footer-section">
             <h3>{{ $settings->company_name ?? 'Alawneh Exchange' }}</h3>
-            <p>{{ $settings->address ?? 'Amman Down Town, Next to Al-Husseini Mosque,<br> Alhashimi St, عمّان، Jordan' }}</p>
-            <p><i class="fas fa-phone"></i> {{ $settings->phone ?? '+962 6 123 4567' }}</p>
-            <p><i class="fas fa-envelope"></i> {{ $settings->email ?? 'info@alawnehex.com' }}</p>
+            <p>{{ $settings->company_address ?? 'Amman Down Town, Next to Al-Husseini Mosque, Alhashimi St, عمّان، Jordan' }}</p>
+            <p><i class="fas fa-phone"></i> {{ $settings->company_phone ?? '+962 6 123 4567' }}</p>
+            <p><i class="fas fa-envelope"></i> {{ $settings->company_email ?? 'info@alawnehex.com' }}</p>
         </div>
         <div class="footer-section">
             <h3>Quick Links</h3>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">About Us</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Career</a></li>
-                <li><a href="#">Contact</a></li>
+                @foreach($navigations as $navigation)
+                <li><a href="{{$navigation->url}}">{{$navigation->title}}</a></li>
+                @endforeach
             </ul>
         </div>
         <div class="footer-section">

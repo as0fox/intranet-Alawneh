@@ -26,6 +26,12 @@ use App\Http\Controllers\Admin\DashboardController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contacts/search', [ContactUserController::class, 'search'])->name('contacts.search');
+Route::get('/contacts', [ContactController::class, 'index1'])->name('contacts.index');
+Route::get('/documents', [DocumentController::class, 'publicIndex'])->name('documents.index');
+Route::get('/events/{event}', [EventUserController::class, 'show'])->name('events.show');
+Route::post('/events/{event}/rsvp', [EventUserController::class, 'rsvp'])->name('events.rsvp');
+Route::post('/invitations/{invitation}/decline', [InvitationController::class, 'decline'])->name('invitations.decline');
 
 Route::middleware(['auth', 'verified'])->prefix('admin')->name('admin.')->group(function () {
     // Dashboard

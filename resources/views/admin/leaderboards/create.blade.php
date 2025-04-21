@@ -11,7 +11,7 @@
         
         <div class="grid grid-cols-1 gap-6">
             <div>
-                <label for="name" class="block font-medium text-sm text-gray-700">Name</label>
+                <label for="name" class="block font-medium text-sm text-gray-700">Branch Name</label>
                 <input id="name" class="rounded-md shadow-sm border-gray-300 focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 block mt-1 w-full" type="text" name="name" value="{{ old('name') }}" required />
             </div>
             

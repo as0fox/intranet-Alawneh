@@ -20,7 +20,6 @@ Route::get('/currency-rates/{currency}', [CurrencyController::class, 'getRates']
 Route::get('/currency-convert/{from}/{to}/{amount}', [CurrencyController::class, 'convert']);
 Route::get('/currencies', [CurrencyController::class, 'currencies']);
 Route::get('/events', [EventController::class, 'index']);
-
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });

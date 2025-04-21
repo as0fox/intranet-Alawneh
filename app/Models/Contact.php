@@ -17,7 +17,7 @@ class Contact extends Model
         'photo',
         'is_active'
     ];
-
+    
     protected $casts = [
         'is_active' => 'boolean'
     ];

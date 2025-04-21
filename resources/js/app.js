@@ -10,10 +10,17 @@ Alpine.start();
 // Simple slider functionality
 document.addEventListener('DOMContentLoaded', function() {
     // Announcement slider
-    const slides = document.querySelectorAll('.slide');
-    const dots = document.querySelectorAll('.dot');
-    const prevBtn = document.querySelector('.prev-slide');
-    const nextBtn = document.querySelector('.next-slide');
+    const slides = document.querySelectorAll('.banking-slide');
+    const dots = document.querySelectorAll('.banking-dot');
+    const prevBtn = document.querySelector('.banking-prev-slide');
+    const nextBtn = document.querySelector('.banking-next-slide');
+    
+    // Only proceed if required elements exist
+    if (!slides.length || !dots.length || !prevBtn || !nextBtn) {
+        console.error('Slider elements not found');
+        return;
+    }
+
     let currentSlide = 0;
     
     function showSlide(n) {
@@ -43,11 +50,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Quick Access Slider
 document.addEventListener('DOMContentLoaded', function () {
-    const linksWrapper = document.querySelector('.links-wrapper');
-    const linkCards = document.querySelectorAll('.link-card');
-    const navDots = document.querySelectorAll('.nav-dot');
-    const prevBtn = document.querySelector('.prev-links');
-    const nextBtn = document.querySelector('.next-links');
+    const linksWrapper = document.querySelector('.banking-links-wrapper');
+    const linkCards = document.querySelectorAll('.banking-link-card');
+    const navDots = document.querySelectorAll('.banking-nav-dot');
+    const prevBtn = document.querySelector('.banking-prev-links');
+    const nextBtn = document.querySelector('.banking-next-links');
+
+    // Only proceed if required elements exist
+    if (!linksWrapper || !linkCards.length || !navDots.length || !prevBtn || !nextBtn) {
+        console.error('Quick Access Slider elements not found');
+        return;
+    }
 
     let currentIndex = 0; // Current slide index
     const cardsPerSlide = 4; // Number of cards visible per slide
@@ -90,22 +103,36 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Currency Exchange Rates
 document.addEventListener('DOMContentLoaded', function () {
-    const currencyRatesContainer = document.querySelector('#currency-rates');
-    const searchInput = document.querySelector('#currency-search');
+    const currencyRatesContainer = document.querySelector('#banking-currency-rates');
+    const searchInput = document.querySelector('#banking-currency-search');
+    
+    // Only proceed if required elements exist
+    if (!currencyRatesContainer || !searchInput) {
+        console.error('Currency exchange elements not found');
+        return;
+    }
+
     let allRows = []; // Store all rows for filtering
 
     // Fetch currency rates from API
     async function fetchCurrencyRates() {
         try {
             const response = await fetch('/api/currency-rates');
-            if (!response.ok) throw new Error('Failed to fetch currency rates');
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
             const data = await response.json();
             
-            // Update the UI with new rates
+            if (!data.rates) {
+                throw new Error('Invalid currency rates data');
+            }
+            
             updateCurrencyTable(data);
         } catch (error) {
-            console.error('Error fetching currency rates:', error);
-            currencyRatesContainer.innerHTML = '<p class="error">Error loading currency rates.</p>';
+            console.error('Currency rates fetch failed:', error);
+            currencyRatesContainer.innerHTML = `
+                <div class="alert alert-warning">
+                    Currency rates currently unavailable. Please try again later.
+                </div>
+            `;
         }
     }
 
@@ -159,6 +186,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Calendar and Events
 document.addEventListener('DOMContentLoaded', function () {
+    const calendarGrid = document.getElementById('calendar-grid');
+    const prevNav = document.querySelector('.cal-nav.prev');
+    const nextNav = document.querySelector('.cal-nav.next');
+    
+    // Only proceed if required elements exist
+    if (!calendarGrid || !prevNav || !nextNav) {
+        console.error('Calendar elements not found');
+        return;
+    }
+
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
     const monthsOfYear = [
         'January', 'February', 'March', 'April', 'May', 'June',
@@ -172,10 +209,16 @@ document.addEventListener('DOMContentLoaded', function () {
     async function fetchEvents() {
         try {
             const response = await fetch('/api/events');
-            if (!response.ok) throw new Error('Failed to fetch events');
-            return await response.json();
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            const data = await response.json();
+            
+            if (!Array.isArray(data)) {
+                throw new Error('Invalid events data format');
+            }
+            
+            return data;
         } catch (error) {
-            console.error('Error fetching events:', error);
+            console.error('Events fetch failed:', error);
             return [];
         }
     }
@@ -269,7 +312,14 @@ document.addEventListener('DOMContentLoaded', function () {
 // Contact Search
 document.addEventListener('DOMContentLoaded', function () {
     const searchInput = document.getElementById('contact-search');
-    const contactList = document.getElementById('contact-list');
+    const contactList = document.getElementById('contacts');
+    
+    // Only proceed if required elements exist
+    if (!searchInput || !contactList) {
+        console.error('Contact search elements not found');
+        return;
+    }
+
     const contacts = Array.from(contactList.querySelectorAll('.contact'));
 
     // Filter contacts based on search input
@@ -292,22 +342,90 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-// Responsive Menu Toggle (for mobile)
-document.addEventListener('DOMContentLoaded', function() {
-    const menuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu = document.getElementById('mobile-menu');
-
-    if (menuButton && mobileMenu) {
-        menuButton.addEventListener('click', function() {
-            mobileMenu.classList.toggle('hidden');
-        });
-    }
-});
 
 // Initialize tooltips
 document.addEventListener('DOMContentLoaded', function() {
     const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
     tooltipTriggerList.map(function (tooltipTriggerEl) {
         return new bootstrap.Tooltip(tooltipTriggerEl);
+    });
+});
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Contact Search Functionality
+    const contactSearch = document.getElementById('contact-search');
+    const searchResults = document.getElementById('search-results');
+    const employeeModal = document.getElementById('employee-modal');
+    const closeModal = document.querySelector('.close-modal');
+
+    // Debounce function to limit API calls
+    function debounce(func, wait) {
+        let timeout;
+        return function(...args) {
+            clearTimeout(timeout);
+            timeout = setTimeout(() => func.apply(this, args), wait);
+        };
+    }
+
+    // Handle search input
+    contactSearch.addEventListener('input', debounce(function(e) {
+        const query = e.target.value.trim();
+        
+        if (query.length < 2) {
+            searchResults.style.display = 'none';
+            return;
+        }
+
+        fetch(`/api/contacts/search?q=${encodeURIComponent(query)}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.length > 0) {
+                    searchResults.innerHTML = '';
+                    data.forEach(employee => {
+                        const item = document.createElement('div');
+                        item.className = 'search-result-item';
+                        item.innerHTML = `
+                            <img src="${employee.photo || '/images/default-profile.png'}" alt="${employee.name}">
+                            <div>
+                                <strong>${employee.name}</strong>
+                                <div class="text-muted">${employee.department}</div>
+                            </div>
+                        `;
+                        item.addEventListener('click', () => showEmployeeDetails(employee));
+                        searchResults.appendChild(item);
+                    });
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.innerHTML = '<div class="search-result-item">No employees found</div>';
+                    searchResults.style.display = 'block';
+                }
+            });
+    }, 300));
+
+    // Show employee details in modal
+    function showEmployeeDetails(employee) {
+        document.getElementById('modal-employee-name').textContent = employee.name;
+        document.getElementById('modal-employee-email').textContent = employee.email;
+        document.getElementById('modal-employee-phone').textContent = employee.phone;
+        document.getElementById('modal-employee-department').textContent = employee.department;
+        document.getElementById('modal-employee-position').textContent = employee.position || 'Employee';
+        document.getElementById('modal-employee-photo').src = employee.photo || '/images/default-profile.png';
+        
+        searchResults.style.display = 'none';
+        contactSearch.value = '';
+        employeeModal.style.display = 'flex';
+    }
+
+    // Close modal
+    closeModal.addEventListener('click', () => {
+        employeeModal.style.display = 'none';
+    });
+
+    // Close modal when clicking outside
+    window.addEventListener('click', (e) => {
+        if (e.target === employeeModal) {
+            employeeModal.style.display = 'none';
+        }
     });
 });
